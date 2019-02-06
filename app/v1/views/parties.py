@@ -37,4 +37,20 @@ def create_party():
         "data": [res]
     }), 201)
 
+@api.route("/parties", methods=['GET'])
+def get_all_parties():
+    try:
+        parties = Political_Party().get_all_parties()
+    except RuntimeError:
+        return make_response(jsonify({
+            "status":500,
+            "error": 'An error occured while processing your request'
+        }), 500)
+    
+    return make_response(jsonify({
+        "status":200,
+        "data": parties
+    }), 200)
+
+
 
