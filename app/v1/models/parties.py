@@ -11,4 +11,7 @@ class Political_Party:
 
     def get_all_parties(self):
         return(parties)
-        
+    
+    def get_by_id(self, id):
+        party = next(filter(lambda x: x['id'] == id, parties), None)
+        return party
