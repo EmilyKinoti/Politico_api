@@ -15,3 +15,10 @@ class Political_Party:
     def get_by_id(self, id):
         party = next(filter(lambda x: x['id'] == id, parties), None)
         return party
+
+    def update_party(self,new_party,id):
+        party = next(filter(lambda x: x['id'] == id, parties), None)
+        party.update(new_party)
+        return(party)
+
+   

@@ -71,5 +71,38 @@ def get_single_party(party_id):
             "error": 'An error occured while processing your request'
         }), 500)
     
+@api.route('/parties/<int:party_id>', methods=['PUT'])
+def edit_party(party_id):
+    party = Political_Party().get_by_id(party_id)
+    if party is None:
+        return make_response(jsonify({
+            'status':404,
+            'error':"party does not exist"
+            }), 404)
+    else:
+        data = request.get_json()
+        updated_party = Political_Party().update_party(data, party_id)
+    return make_response(jsonify({
+        "status":200,
+        "data":[updated_party]
+    }),200)
+
+    
+@api.route('/parties/<int:party_id>', methods=['DELETE'])
+def delete_party(party_id):
+    party = Political_Party().get_by_id(party_id)
+    if party is None:
+        return make_response(jsonify({
+            'status':404,
+            'error':"party does not exist"
+            }), 404)
+    else:
+        Political_Party().delete_party(party)
+    return make_response(jsonify({
+        "status":200,
+        "data":[{
+            "message":"party deleted successfully"
+        }]
+    }),200)
 
 
