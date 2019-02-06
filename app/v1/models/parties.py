@@ -16,9 +16,14 @@ class Political_Party:
         party = next(filter(lambda x: x['id'] == id, parties), None)
         return party
 
-     def update_party(self,new_party,id):
+    def update_party(self,new_party,id):
         party = next(filter(lambda x: x['id'] == id, parties), None)
         party.update(new_party)
         return(party)
+
+    def delete_party(self,party):
+        parties.remove(party)
+
+
 
    
